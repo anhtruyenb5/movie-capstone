@@ -4,16 +4,18 @@ import { getLocalStorage } from "../../utils/util"
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
+    EditOutlined,
     UploadOutlined,
     UserOutlined,
     VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
 
 const { Header, Sider, Content } = Layout;
 
 const AdminTemlate = () => {
+    const { maPhim } = useParams();
     useEffect(() => {
         const user = getLocalStorage("user")
         // console.log(user)
@@ -46,6 +48,11 @@ const AdminTemlate = () => {
                             key: '2',
                             icon: <VideoCameraOutlined />,
                             label: <NavLink to="/admin/them-phim">Thêm phim</NavLink>,
+                        },
+                        {
+                            key: '3',
+                            icon: <EditOutlined />,
+                            label: <NavLink to={`/admin/edit-phim/${maPhim}`}>Edit phim</NavLink>,
                         },
                     ]}
                 />

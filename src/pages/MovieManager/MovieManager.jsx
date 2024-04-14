@@ -2,9 +2,16 @@ import React, { useEffect } from 'react'
 import { Table } from "antd"
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllMovieThunk } from '../../redux/slice/phimSlice';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
+import { Input, Button } from 'antd';
+import { AudioOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { render } from '@testing-library/react';
+
 
 const MovieManager = () => {
+    const { maPhim } = useParams();
+    const { Search } = Input;
+    const onSearch = (value, _e, info) => console.log(info?.source, value);
     const { arrMovie } = useSelector((state) => state.phimSlice);
     const dispatch = useDispatch()
     useEffect(() => {
@@ -28,53 +35,80 @@ const MovieManager = () => {
     const columns = [
         {
             title: 'Mã phim',
-            dataIndex: 'id',
-            key: 'id',
+            dataIndex: 'maPhim',
+            sorter: (a, b) => a.maPhim - b.maPhim,
+            width: "10%"
         },
         {
             title: 'Tên phim',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'tenPhim',
+            sorter: (a, b) => {
+                let tenPhimA = a.tenPhim.toLowerCase().trim();
+                let tenPhimB = b.tenPhim.toLowerCase().trim();
+                if (tenPhimA > tenPhimB) {
+                    return 1;
+                }
+                return -1;
+            },
+            width: "25%",
         },
         {
             title: 'Hình ảnh',
-            dataIndex: 'img',
-            key: 'img',
+            dataIndex: 'hinhAnh',
+            render: (text, film, index) => {
+                return (
+                    <img src={film.hinhAnh} alt={film.tenPhim} width={50} height={50} onError={(e) => {
+                        e.target.onError = null; e.target.src = `http://picsum.photos/${index}/50/50`
+                    }} />
+                )
+            },
+            width: "20%",
         },
         {
             title: 'Mô tả',
             dataIndex: 'moTa',
-            key: 'moTa',
+            sorter: (a, b) => {
+                let moTaA = a.mota.toLowerCase().trim();
+                let moTaB = b.moTa.toLowerCase().trim();
+                if (moTaA > moTaB) {
+                    return 1;
+                }
+                return -1;
+            },
+            render: (text, film) => {
+                return <div>{film.moTa.lenght > 50 ? film.moTa.subStr(0, 50) + "..." : film.moTa}</div>
+            },
+            width: "25%",
         },
         {
-            title: 'Update',
-            dataIndex: '',
-            key: 'u',
-            render: () =>
-                <NavLink to="/">Update</NavLink>
-        },
-        {
-            title: 'Delete',
-            dataIndex: '',
-            key: 'x',
-            render: () =>
-                <NavLink to="/">Delete</NavLink>
+            title: 'Hành động',
+            dataIndex: 'hanhDong',
+            render: (text, film) => {
+                return (
+                    <div>
+                        <NavLink key={1} className="mr-2 text-2xl" to={`/admin/edit-phim/${film.maPhim}`}><EditOutlined style={{ color: "blue" }} /></NavLink>
+                        <NavLink key={2} className="text-2xl " to="/"><DeleteOutlined style={{ color: "red" }} /></NavLink>
+                    </div>
+                )
+            },
+            width: "20%"
         },
     ];
+    const data = arrMovie;
+    const onChange = (pagination, filters, sorter, extra) => {
+        console.log('params', pagination, filters, sorter, extra);
+    };
     return (
-        <Table dataSource={arrMovie.map((movie, index) => {
-            return (
-                {
-                    key: index,
-                    id: <h2 className='text-3xl'>{movie.maPhim}</h2>,
-                    name: <h2 className='text-3xl'>{movie.tenPhim}</h2>,
-                    img: <img className='w-1/2 h-96 object-cover rounded' src={movie.hinhAnh} />,
-                    moTa: <p className="line-clamp-2 w-60">{movie.moTa}</p>,
-                }
-
-            )
-        })} columns={columns}
-        />
+        <div>
+            <h3 className="text-4xl"></h3>
+            <Button className='mb-5'><NavLink to="/admin/them-phim">Thêm phim</NavLink></Button>
+            <Search
+                placeholder="Tìm kiếm"
+                size="large"
+                onSearch={onSearch}
+            />
+            <Table columns={columns} dataSource={data} onChange={onChange} />
+        </div>
     )
 }
 
