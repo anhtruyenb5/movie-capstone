@@ -38,11 +38,11 @@ const useRoutesCustom = () => {
           path: "quan-li-phim",
           element: <MovieManager />,
         },
-        {
-          // path: "them-phim",
-          element: <AddMovie />,
-          index: "true",
-        },
+        // {
+        //   // path: "them-phim",
+        //   element: <AddMovie />,
+        //   index: "true",
+        // },
         {
           path: "them-phim",
           element: <AddMovie />,

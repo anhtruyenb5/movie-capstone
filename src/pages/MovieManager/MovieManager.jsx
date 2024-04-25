@@ -2,14 +2,12 @@ import React, { useEffect } from 'react'
 import { Table } from "antd"
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllMovieThunk } from '../../redux/slice/phimSlice';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Input, Button } from 'antd';
 import { AudioOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { render } from '@testing-library/react';
-
+import { xoaPhim } from '../../redux/slice/editPhimSlice';
 
 const MovieManager = () => {
-    const { maPhim } = useParams();
     const { Search } = Input;
     const onSearch = (value, _e, info) => console.log(info?.source, value);
     const { arrMovie } = useSelector((state) => state.phimSlice);
@@ -17,21 +15,6 @@ const MovieManager = () => {
     useEffect(() => {
         dispatch(getAllMovieThunk("abc"))
     }, [])
-    // const dataSource = [
-    //     {
-    //         key: '1',
-    //         name: 'Mike',
-    //         age: 32,
-    //         address: '10 Downing Street',
-    //     },
-    //     {
-    //         key: '2',
-    //         name: 'John',
-    //         age: 42,
-    //         address: '10 Downing Street',
-    //     },
-    // ];
-
     const columns = [
         {
             title: 'Mã phim',
@@ -87,7 +70,11 @@ const MovieManager = () => {
                 return (
                     <div>
                         <NavLink key={1} className="mr-2 text-2xl" to={`/admin/edit-phim/${film.maPhim}`}><EditOutlined style={{ color: "blue" }} /></NavLink>
-                        <NavLink key={2} className="text-2xl " to="/"><DeleteOutlined style={{ color: "red" }} /></NavLink>
+                        <span key={2} className="text-2xl " onClick={() => {
+                            if (window.confirm("Xóa phim: " + film.tenPhim)) {
+                                dispatch(xoaPhim(film.maPhim));
+                            }
+                        }}><DeleteOutlined style={{ color: "red" }} /></span>
                     </div>
                 )
             },

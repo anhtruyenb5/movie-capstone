@@ -10,7 +10,13 @@ export const quanLyPhimServ = {
     themPhimUploadHinh: (data) => {
         return http.post("/QuanLyPhim/ThemPhimUploadHinh", data)
     },
-    getMovieByMaPhim: () => {
-        return http.get("QuanLyPhim/LayThongTinPhim/")
+    getMovieByMaPhim: (maPhim) => {
+        return http.get(`/QuanLyPhim/LayThongTinPhim?maPhim=${maPhim}`)
+    },
+    capNhatPhimUpload: (data) => {
+        return http.post(`/QuanLyPhim/CapNhatPhimUpload`, data)
+    },
+    xoaPhim: (maPhim) => {
+        return http.delete(`/QuanLyPhim/XoaPhim?maPhim=${maPhim}`)
     }
 }

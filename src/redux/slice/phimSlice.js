@@ -22,6 +22,7 @@ const phimSlice = createSlice({
         handleAllMovie: (state, action) => {
             console.log(action)
             state.arrMovie = action.payload
+            console.log(state.arrMovie)
         },
     },
     extraReducers: (builder) => {

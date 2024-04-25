@@ -1,13 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import InputCustom from '../../components/Input/InputCustom'
 import { DatePicker } from 'antd'
 import { Switch } from 'antd';
 import { Rate } from 'antd';
 import { useFormik } from 'formik';
+import { capNhatPhimUpload, getMovieByMaPhim } from '../../redux/slice/editPhimSlice';
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom';
+import moment from 'moment';
 import { quanLyPhimServ } from '../../services/quanLyPhim';
 
 const EditMovie = () => {
-    const [image, setImage] = useState();
+    const [image, setImage] = useState("");
+    const dispatch = useDispatch();
+    const { id } = useParams();
+    const { movie } = useSelector(state => state.editPhimSlice);
+
+    useEffect(() => {
+        dispatch(getMovieByMaPhim(id));
+    }, [dispatch])
+
+    useEffect(() => {
+        if (movie) {
+            setFieldValue("maPhim", movie.maPhim || '');
+            setFieldValue("tenPhim", movie.tenPhim || '');
+            setFieldValue("trailer", movie.trailer || '');
+            setFieldValue("moTa", movie.moTa || '');
+            setFieldValue("ngayKhoiChieu", movie.ngayKhoiChieu || '');
+            setFieldValue("sapChieu", movie.sapChieu || false);
+            setFieldValue("dangChieu", movie.dangChieu || false);
+            setFieldValue("hot", movie.hot || false);
+            setFieldValue("danhGia", (movie.danhGia || 0) / 2);
+            setImage(movie.hinhAnh || "");
+        }
+    }, [movie]);
+
     const {
         handleSubmit,
         handleBlur,
@@ -16,15 +43,16 @@ const EditMovie = () => {
         touched,
         setFieldValue } = useFormik({
             initialValues: {
-                tenPhim: "",
-                trailer: "",
-                moTa: "",
-                ngayKhoiChieu: "",
-                sapChieu: true,
-                dangChieu: true,
-                hot: true,
+                maPhim: movie.maPhim,
+                tenPhim: movie?.tenPhim,
+                trailer: movie?.trailer,
+                moTa: movie?.moTa,
+                ngayKhoiChieu: movie?.ngayKhoiChieu,
+                sapChieu: movie?.sapChieu,
+                dangChieu: movie?.dangChieu,
+                hot: movie?.hot,
                 danhGia: 0,
-                hinhAnh: ""
+                hinhAnh: null,
             },
             onSubmit: async (values) => {
                 try {
@@ -41,7 +69,8 @@ const EditMovie = () => {
                         }
                     }
                     const res = await quanLyPhimServ.themPhimUploadHinh(formData);
-                    console.log(res)
+                    // cập nhật upload phim
+                    dispatch(capNhatPhimUpload(formData))
                 } catch (error) {
                     console.log(error)
                 }
@@ -50,6 +79,10 @@ const EditMovie = () => {
     const onChange = (checked) => {
         console.log(`switch to ${checked}`);
     };
+    const changeDatePicker = (value) => {
+        let ngayKhoiChieu = moment(value);
+        setFieldValue("ngayKhoiChieu", ngayKhoiChieu)
+    }
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -80,9 +113,9 @@ const EditMovie = () => {
                     <label htmlFor="">Nhập ngày chiếu</label>
                     <DatePicker
                         format="DD-MM-YYYY"
-                        onChange={(datejs, dateString) => {
-                            setFieldValue("ngayKhoiChieu", dateString)
-                        }} />
+                        onChange={changeDatePicker}
+                        value={moment(values.ngayKhoiChieu)}
+                    />
                 </div>
                 <div>
                     <label htmlFor="">Đang chiếu</label>
@@ -111,7 +144,6 @@ const EditMovie = () => {
                         value={values.danhGia / 2}
                         allowHalf
                         onChange={(value) => {
-                            console.log(value);
                             setFieldValue("danhGia", value * 2)
                         }}
                     />
@@ -127,10 +159,10 @@ const EditMovie = () => {
                             setFieldValue("hinhAnh", event.target.files[0])
                         }}
                         type="file" />
-                    <img className="w-32" src={image} alt="" />
+                    <img className="w-32" src={image === "" ? movie.hinhAnh : image} alt="" />
                 </div>
                 <div>
-                    <button type="submit">Thêm phim</button>
+                    <button type="submit">Cập nhật</button>
                 </div>
             </form>
         </div>
