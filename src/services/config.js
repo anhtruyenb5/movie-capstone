@@ -7,3 +7,19 @@ export const http = axios.create({
     },
     timeout: 30000,
 })
+// http.interceptors.request.use(
+//     (config) => {
+//         const user = JSON.parse(localStorage.getItem("user"));
+//         if (user) {
+//             config.headers.Authorization = `Bearer ${user?.accessToken}`;
+//         }
+
+//         return config;
+//     },
+//     (error) => Promise.reject(error),
+// );
+
+// http.interceptors.response.use(
+//     (response) => response.data.content,
+//     (error) => Promise.reject(error.response.data.content),
+// );

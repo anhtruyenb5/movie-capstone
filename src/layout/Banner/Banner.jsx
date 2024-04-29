@@ -36,7 +36,7 @@ const Banner = () => {
             <Carousel
                 nextArrow={<div><i className="fa-regular fa-arrow-right"></i></div>}
                 prevArrow={<div><i className="fa-regular fa-arrow-left"></i></div>}
-                arrows={true} dots={false} afterChange={onChange}>
+                arrows={true} dots={true} afterChange={onChange}>
                 {arrBanner.map((banner, index) => {
                     return (
                         <div key={index} className='h-screen-70'>

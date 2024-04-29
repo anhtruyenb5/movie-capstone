@@ -23,7 +23,7 @@ const ListMovie = () => {
         <div className='grid grid-cols-4 gap-10'>
             {arrMovie.map((movie, index) => {
                 return (
-                    <div className='movie__item space-y-4'>
+                    <div className='movie__item space-y-4' key={index}>
                         <img src={movie.hinhAnh} className='w-full h-96 object-cover rounded' alt="" />
                         <div className="infoMovie">
                             <h3>
@@ -34,7 +34,7 @@ const ListMovie = () => {
                         </div>
                         <div className="muaVe">
                             <button className="bg-orange-600 w-full h-20 rounded font-semibold text-lg text-white">
-                                <NavLink to={`/detail/${movie.maPhim}`}>Mua vé</NavLink></button>
+                                <NavLink to={`/detail/${movie.maPhim}`}><button>Mua vé</button></NavLink></button>
                         </div>
                     </div>
                 )

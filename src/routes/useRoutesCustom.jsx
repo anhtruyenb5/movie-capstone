@@ -9,6 +9,9 @@ import MovieManager from '../pages/MovieManager/MovieManager';
 import AddMovie from '../pages/AddMovie/AddMovie';
 import SignUp from '../pages/SignUp/SignUp';
 import EditMovie from '../pages/EditMovie/EditMovie';
+import RequireAuth from '../utils/guard/index';
+import { ROLE } from "../utils/constants";
+import TicketBookingPage  from "../pages/TicketBookingPage";
 
 const useRoutesCustom = () => {
   const routes = useRoutes([
@@ -56,6 +59,14 @@ const useRoutesCustom = () => {
     {
       path: "/detail/:id",
       element: <DetailPage />
+    },
+    {
+      path: "ticket-booking/:scheduleId",
+      element: (
+        // <RequireAuth roles={[ROLE.ADMIN, ROLE.CLIENT]}>
+          <TicketBookingPage />
+        // </RequireAuth>
+      ),
     },
 
   ]);
