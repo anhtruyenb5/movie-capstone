@@ -61,14 +61,15 @@ const EditMovie = () => {
                     const formData = new FormData();
                     // sử dụng for in để duyệt qua object qua từng key và truyền dữ liệu vào formdata
                     for (let key in values) {
-                        if (key == "hinhAnh") {
-                            formData.append("File", values[key]);
-                        }
-                        else {
+                        if (key !== "hinhAnh") {
                             formData.append(key, values[key]);
                         }
+                        else {
+                            if (values.hinhAnh !== null) {
+                                formData.append("File", values.hinhAnh);
+                            }
+                        }
                     }
-                    const res = await quanLyPhimServ.themPhimUploadHinh(formData);
                     // cập nhật upload phim
                     dispatch(capNhatPhimUpload(formData))
                 } catch (error) {

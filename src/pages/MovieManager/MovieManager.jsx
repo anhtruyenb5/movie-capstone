@@ -4,16 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllMovieThunk } from '../../redux/slice/phimSlice';
 import { NavLink } from 'react-router-dom';
 import { Input, Button } from 'antd';
-import { AudioOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { AudioOutlined, EditOutlined, DeleteOutlined, CalendarOutlined } from '@ant-design/icons';
 import { xoaPhim } from '../../redux/slice/editPhimSlice';
 
 const MovieManager = () => {
     const { Search } = Input;
-    const onSearch = (value, _e, info) => console.log(info?.source, value);
     const { arrMovie } = useSelector((state) => state.phimSlice);
     const dispatch = useDispatch()
+    const onSearch = (value) => {
+        console.log(value)
+        dispatch(getAllMovieThunk(value))
+    };
     useEffect(() => {
-        dispatch(getAllMovieThunk("abc"))
+        dispatch(getAllMovieThunk())
     }, [])
     const columns = [
         {
@@ -75,6 +78,8 @@ const MovieManager = () => {
                                 dispatch(xoaPhim(film.maPhim));
                             }
                         }}><DeleteOutlined style={{ color: "red" }} /></span>
+                        <NavLink key={3} className="ml-2 text-2xl" to={`/admin/show-time/${film.maPhim}`}><CalendarOutlined style={{ color: "green" }} /></NavLink>
+
                     </div>
                 )
             },

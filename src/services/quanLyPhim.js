@@ -4,7 +4,10 @@ export const quanLyPhimServ = {
     getAllBanner: () => {
         return http.get("/QuanLyPhim/LayDanhSachBanner");
     },
-    getAllMovie: () => {
+    getAllMovie: (tenPhim = "") => {
+        if (tenPhim.trim() != "") {
+            return http.get(`/QuanLyPhim/LayDanhSachPhim?maNhom=GP01&tenPhim=${tenPhim}`)
+        }
         return http.get("/QuanLyPhim/LayDanhSachPhim?maNhom=GP01")
     },
     themPhimUploadHinh: (data) => {

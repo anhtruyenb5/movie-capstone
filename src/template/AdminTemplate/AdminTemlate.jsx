@@ -8,6 +8,7 @@ import {
     UploadOutlined,
     UserOutlined,
     VideoCameraOutlined,
+    CalendarOutlined
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 import { NavLink, Outlet, useParams } from 'react-router-dom';
@@ -53,6 +54,11 @@ const AdminTemlate = () => {
                             key: '3',
                             icon: <EditOutlined />,
                             label: <NavLink to={`/admin/edit-phim/${maPhim}`}>Edit phim</NavLink>,
+                        },
+                        {
+                            key: '4',
+                            icon: <CalendarOutlined />,
+                            label: <NavLink to={`/admin/show-time/${maPhim}`}>Show time</NavLink>,
                         },
                     ]}
                 />

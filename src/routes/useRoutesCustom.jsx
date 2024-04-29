@@ -9,6 +9,7 @@ import MovieManager from '../pages/MovieManager/MovieManager';
 import AddMovie from '../pages/AddMovie/AddMovie';
 import SignUp from '../pages/SignUp/SignUp';
 import EditMovie from '../pages/EditMovie/EditMovie';
+import ShowTime from '../pages/ShowTime/ShowTime';
 
 const useRoutesCustom = () => {
   const routes = useRoutes([
@@ -50,6 +51,10 @@ const useRoutesCustom = () => {
         {
           path: "edit-phim/:id",
           element: <EditMovie />,
+        },
+        {
+          path: "show-time/:id",
+          element: <ShowTime />
         }
       ],
     },

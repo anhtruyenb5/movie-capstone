@@ -8,9 +8,9 @@ const initialState = {
 }
 
 export const getAllMovieThunk = createAsyncThunk("quanLyPhim/getAllMovieThunk",
-    async (dataLocal, { _, dispatch }) => {
+    async (dataLocal = "", { _, dispatch }) => {
         dispatch(handleTurnOnLoading)
-        const res = await quanLyPhimServ.getAllMovie();
+        const res = await quanLyPhimServ.getAllMovie(dataLocal);
         dispatch(handleTurnOffLoading)
         return res.data.content
     })
