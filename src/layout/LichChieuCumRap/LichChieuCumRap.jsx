@@ -20,25 +20,16 @@ const LichChieuCumRap = () => {
     return (
         <div className="mt-10">
             <h2 className='font-bold text-2xl text-center'>
-                Danh sach lich chieu cum rap
+                Danh sách lịch chiếu cụm rạp
             </h2>
             {/* tab lich chieu cum rap */}
             <div>
                 <Tabs
                     tabPosition="left"
-                    // items={new Array(3).fill(null).map((_, i) => {
-                    //     const id = String(i + 1);
-                    //     return {
-                    //         label: `Tab-${id}`,
-                    //         key: id,
-                    //         children: `Content of tab ${id}`,
-                    //     };
-                    // })}\
                     style={{
                         height: "700px"
                     }}
                     items={arrCumRap.map((cumrap, index) => {
-                        console.log(cumrap)
                         return {
                             label: <img className="w-14" src={cumrap.logo} />,
                             key: cumrap.maHeThongRap,
