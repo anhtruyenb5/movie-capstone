@@ -60,6 +60,11 @@ const AdminTemlate = () => {
                             icon: <CalendarOutlined />,
                             label: <NavLink to={`/admin/show-time/${maPhim}`}>Show time</NavLink>,
                         },
+                        {
+                            key: '5',
+                            icon: <CalendarOutlined />,
+                            label: <NavLink to={`/admin/quan-li-user`}>Quản lý User</NavLink>,
+                        }
                     ]}
                 />
             </Sider>
