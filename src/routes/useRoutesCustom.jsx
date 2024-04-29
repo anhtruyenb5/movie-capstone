@@ -13,6 +13,7 @@ import RequireAuth from '../utils/guard/index';
 import { ROLE } from "../utils/constants";
 import TicketBookingPage from "../pages/TicketBookingPage";
 import ShowTime from '../pages/ShowTime/ShowTime';
+import UserManager from '../pages/UserManager/UserManager';
 
 const useRoutesCustom = () => {
   const routes = useRoutes([
@@ -58,6 +59,10 @@ const useRoutesCustom = () => {
         {
           path: "show-time/:id",
           element: <ShowTime />
+        },
+        {
+          path: "quan-li-user",
+          element: <UserManager />
         }
       ],
     },
