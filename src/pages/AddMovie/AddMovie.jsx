@@ -130,7 +130,7 @@ const AddMovie = () => {
                     <img className="w-32" src={image} alt="" />
                 </div>
                 <div>
-                    <button type="submit">Thêm phim</button>
+                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded my-2 text-xl py-2 px-2 ">Thêm phim</button>
                 </div>
             </form>
         </div>

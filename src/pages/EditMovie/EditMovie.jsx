@@ -80,9 +80,8 @@ const EditMovie = () => {
     const onChange = (checked) => {
         console.log(`switch to ${checked}`);
     };
-    const changeDatePicker = (value) => {
-        let ngayKhoiChieu = moment(value);
-        setFieldValue("ngayKhoiChieu", ngayKhoiChieu)
+    const changeDatePicker = (date, dateString) => {
+        setFieldValue("ngayKhoiChieu", moment(date))
     }
     return (
         <div>
@@ -113,7 +112,7 @@ const EditMovie = () => {
                 <div>
                     <label htmlFor="">Nhập ngày chiếu</label>
                     <DatePicker
-                        format="DD-MM-YYYY"
+                        format="DD/MM/YYYY"
                         onChange={changeDatePicker}
                         value={moment(values.ngayKhoiChieu)}
                     />
@@ -163,7 +162,7 @@ const EditMovie = () => {
                     <img className="w-32" src={image === "" ? movie.hinhAnh : image} alt="" />
                 </div>
                 <div>
-                    <button type="submit">Cập nhật</button>
+                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded my-2 text-xl py-2 px-2 ">Cập nhật</button>
                 </div>
             </form>
         </div>
