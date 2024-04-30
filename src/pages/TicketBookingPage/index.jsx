@@ -16,6 +16,7 @@ import {fetchTicketBookingDetails , closeModal } from "../../redux/slice/ticketB
 
 // Scss
 import "./style.scss";
+import Header from "../../layout/Header/Header";
 
 const TicketBookingPage = () => {
   useScrollToTop();
@@ -28,7 +29,8 @@ const TicketBookingPage = () => {
   }, []);
 
   return (
-    <Box className="container ticket-booking-page " component="section">
+    <div className="container ticket-booking-page " component="section">
+      <Header/>
       <Container maxWidth="xl">
         <Grid container spacing={3}>
           <Grid item md={8.5} xs={12}>
@@ -40,7 +42,8 @@ const TicketBookingPage = () => {
         </Grid>
         <Modal actCloseModal={closeModal} modalProps={modal} />
       </Container>
-    </Box>
+    </div>
+    
   );
 };
 

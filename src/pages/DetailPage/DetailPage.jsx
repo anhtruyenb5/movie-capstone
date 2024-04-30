@@ -15,6 +15,7 @@ import { Tabs } from "antd";
 import CumRapDetail from "./CumRapDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import Footer from "../../layout/Footer";
 const Detail = () => {
   const { loading, data, error } = useSelector(
     (state) => state.movieDetailsSlice
@@ -26,8 +27,6 @@ const Detail = () => {
 
       <MovieDetail />
       <div className="container w-3/4 py-10">
-
-
         <div className="cum_rap">
           <Tabs
             tabPosition="left"
@@ -35,7 +34,6 @@ const Detail = () => {
               height: "50vh",
             }}
             items={data?.heThongRapChieu?.map((cumrap, index) => {
-          
               return {
                 label: <img className="w-14" src={cumrap.logo} />,
                 key: cumrap.maHeThongRap,
@@ -45,6 +43,7 @@ const Detail = () => {
           />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
