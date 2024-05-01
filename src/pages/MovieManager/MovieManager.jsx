@@ -63,6 +63,7 @@ const MovieManager = () => {
             },
             render: (text, film) => {
                 return <div className="line-clamp-3">{film.moTa}</div>
+
             },
             width: "25%",
         },
