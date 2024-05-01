@@ -1,15 +1,11 @@
 import { http } from "./config";
 
 const resourceName = "QuanLyDatVe/";
-const user = JSON.parse(localStorage.getItem("user"));
- // Lấy token từ local storage
-const token = user.accessToken
-const headers = { Authorization: `Bearer ${token}` }; // Tạo header Authorization
 
 const ticketBookingApi = {
   bookTicket: (ticket) => {
     const url = resourceName + "DatVe";
-    return http.post(url, ticket, { headers });
+    return http.post(url, ticket);
   },
   getTicketOfficeList: (params) => {
     const url = resourceName + "LayDanhSachPhongVe";
@@ -17,7 +13,7 @@ const ticketBookingApi = {
   },
   createShowtime: (showtime) => {
     const url = resourceName + "TaoLichChieu";
-    return http.post(url, showtime, { headers });
+    return http.post(url, showtime);
   },
 };
 
