@@ -15,6 +15,7 @@ import { Tabs } from "antd";
 import CumRapDetail from "./CumRapDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import Footer from "../../layout/Footer";
 const Detail = () => {
   const { loading, data, error } = useSelector(
     (state) => state.movieDetailsSlice
@@ -45,6 +46,7 @@ const Detail = () => {
           />
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

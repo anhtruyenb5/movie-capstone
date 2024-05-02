@@ -4,6 +4,7 @@ import Banner from '../../layout/Banner/Banner'
 import ListMovie from '../../layout/ListMovie/ListMovie'
 import LichChieuCumRap from '../../layout/LichChieuCumRap/LichChieuCumRap'
 import { NotifyContext } from '../../template/UserTemplate/UserTemPlate'
+import Footer from '../../layout/Footer'
 
 const HomePage = () => {
     // const notify = useContext(NotifyContext)
@@ -22,6 +23,7 @@ const HomePage = () => {
             </div>
 
             {/* footer  */}
+            <Footer/>
         </div>
     )
 }

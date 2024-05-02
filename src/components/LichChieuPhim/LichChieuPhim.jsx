@@ -2,6 +2,7 @@ import React from "react";
 import { Tabs } from "antd";
 import "./lichChieuPhim.scss";
 import moment from "moment";
+import { NavLink } from "react-router-dom";
 const LichChieuPhim = ({ cumrap }) => {
   return (
     <div>
@@ -51,21 +52,26 @@ const LichChieuPhim = ({ cumrap }) => {
                               .map((gioChieu, index) => {
                                 return (
                                   <div>
-                                    <p className="space-x-3">
-                                      {/* ngày tháng  */}
-                                      <span>
-                                        {moment(
-                                          gioChieu.ngayChieuGioChieu
-                                        ).format("DD-MM-YYYY")}
-                                      </span>
-                                      <span>~</span>
-                                      {/* giờ chiếu  */}
-                                      <span>
-                                        {moment(
-                                          gioChieu.ngayChieuGioChieu
-                                        ).format("hh:mm")}
-                                      </span>
-                                    </p>
+                                    <NavLink
+                                      to={`/ticket-booking/${gioChieu.maLichChieu}`}
+                                      className="lich-chieu-link"
+                                    >
+                                      <p className="space-x-3">
+                                        {/* ngày tháng  */}
+                                        <span>
+                                          {moment(
+                                            gioChieu.ngayChieuGioChieu
+                                          ).format("DD-MM-YYYY")}
+                                        </span>
+                                        <span>~</span>
+                                        {/* giờ chiếu  */}
+                                        <span>
+                                          {moment(
+                                            gioChieu.ngayChieuGioChieu
+                                          ).format("hh:mm")}
+                                        </span>
+                                      </p>
+                                    </NavLink>
                                   </div>
                                 );
                               })}

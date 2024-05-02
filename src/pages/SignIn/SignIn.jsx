@@ -83,7 +83,7 @@ const SignIn = () => {
                         />
                         <div>
                             <p>Chưa có tài khoản ư? bấm
-                                <NavLink to="sign-up" className="mx-1 text-blue-500">vào dây</NavLink>
+                                <NavLink to="/sign-up" className="mx-1 text-blue-500">vào đây</NavLink>
                                 để đăng ký</p>
                             <button type="submit"
                                 className="py-2 px-5 bg-black text-white rounded-md w-full">Đăng nhập</button>
